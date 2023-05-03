@@ -21,6 +21,9 @@ app.set('views', path.join(__dirname, 'app_server', 'views'));
 // register handlebars partials 
 hbs.registerPartials(path.join(__dirname, 'app_server', 'views/partials'));
 app.set('view engine', 'hbs');
+hbs.registerHelper('indexLessThan', function(indexNumber, threshold){
+  return indexNumber < threshold;
+});
 
 
 app.use(logger('dev'));
