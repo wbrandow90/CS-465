@@ -65,4 +65,4 @@ process.on('SIGTERM', () => {
 connect();
 
 // Bring in the mongoose schema
-require('./travlr');
+require('./models/travlr');
