@@ -11,5 +11,17 @@ const tripSchema = new mongoose.Schema({
     image: { type: String, required: true },
     description: { type: String, required: true }
 });
+
+// Define the rooms schema
+const roomSchema = new mongoose.Schema({
+    name: { type: String, required: true, index: true },
+    image: { type: String, required: true },
+    description: { type: String, required: true },
+    rate: { type: String, required: true }
+});
+
 // mongoose.model('trips', tripSchema);
-module.exports = mongoose.model("trips", tripSchema);
+module.exports = [
+    mongoose.model("trips", tripSchema), 
+    mongoose.model("rooms", roomSchema)
+];
