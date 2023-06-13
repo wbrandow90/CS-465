@@ -61,4 +61,10 @@ export class EditTripComponent implements OnInit {
     }
   }
 
+  private deleteTrip(): void {
+    let tripCode = localStorage.getItem('tripCode');
+    this.tripService.deleteTrip(tripCode);
+    this.router.navigate(['']);
+  }
+
 }

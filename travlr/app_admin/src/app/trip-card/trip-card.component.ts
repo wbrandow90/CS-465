@@ -12,7 +12,7 @@ export class TripCardComponent implements OnInit {
   @Input('trip') trip: any;
 
   constructor(
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
