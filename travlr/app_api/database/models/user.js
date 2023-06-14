@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const { use } = require('passport');
 
 const userSchema = new mongoose.Schema ({
     email: {
@@ -29,7 +28,7 @@ userSchema.methods.validPassword = function(password) {
 
 userSchema.methods.generateJwt = function() {
     const expiry = new Date();
-    expiry.setDate(expiry.getDate + 7);
+    expiry.setDate(expiry.getDate() + 7); 
 
     return jwt.sign({
         _id: this._id,
@@ -39,4 +38,4 @@ userSchema.methods.generateJwt = function() {
     }, process.env.JWT_SECRET);
 };
 
-module.exports = mongoose.model('users', userSchema);
+module.exports = mongoose.model('user', userSchema);
