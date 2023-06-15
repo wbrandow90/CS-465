@@ -4,9 +4,10 @@ const User = mongoose.model('user');
 
 const getUser = (req, res, callback) => {
     console.log('In tripsController#getUser()');
-    if (req.payload && req.payload.email) {            
+
+    if (req.auth && req.auth.email) {            
         User
-            .findOne({ email : req.payload.email })         
+            .findOne({ email : req.auth.email })         
             .exec((err, user) => {
                 if (!user) {
                     return res
@@ -102,6 +103,7 @@ const tripsAddTrip = async (req, res) => {
 }
 
 const tripsUpdateTrip = async (req, res) => {
+    console.log('Inside tripsController#tripsUpdateTrip()')
     console.log(req.body);
     getUser(req, res, (req, res) => {
         Trip

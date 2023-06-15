@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Trip } from '../models/trip';
 import { User } from '../models/user';
 import { AuthResponse } from '../models/auth-response';
@@ -18,8 +18,17 @@ export class TripDataService {
 
   public addTrip(formData: Trip): Promise<Trip> {
     console.log('Inside TripDataService#addTrip');
+
+    // get authToken from local storage
+    const authToken = this.storage.getItem('travlr-token');
+    console.log(authToken);
+
+    // append authToken to request headers
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${authToken}`);    
+
     return this.http
-      .post(this.tripUrl, formData)
+      .post(this.tripUrl, formData, { headers: headers })
       .toPromise()
       .then(response => response.json() as Trip[])
       .catch(this.handleError);
@@ -45,9 +54,18 @@ export class TripDataService {
 
   public updateTrip(formData: Trip): Promise<Trip> {
     console.log('Inside TripDataService#updateTrip');
-    console.log(formData);
+    console.log(formData.code); 
+    
+    // get authToken from local storage
+    const authToken = this.storage.getItem('travlr-token');
+    console.log(authToken);
+
+    // append authToken to request headers
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${authToken}`);
+
     return this.http
-      .put(this.tripUrl + formData.code, formData)
+      .put(this.tripUrl + formData.code, formData, { headers: headers })
       .toPromise()
       .then(response => response.json() as Trip[])
       .catch(this.handleError);
@@ -55,8 +73,17 @@ export class TripDataService {
 
   public deleteTrip(tripCode: string): Promise<Trip> {
     console.log('Inside TripDataService#deleteTrip(tripCode)');
+
+    // get authToken from local storage
+    const authToken = this.storage.getItem('travlr-token');
+    console.log(authToken);
+
+    // append authToken to request headers
+    const headers = new Headers();
+    headers.append('Authorization', `Bearer ${authToken}`);    
+
     return this.http
-      .delete(this.tripUrl + tripCode)
+      .delete(this.tripUrl + tripCode, { headers: headers })
       .toPromise()
       .then(response => response.json() as Trip[])
       .catch(this.handleError);
