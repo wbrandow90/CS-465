@@ -1,1 +1,7 @@
 <div class="container" *ngIf="!isLoggedIn()">Please login to continue</div>
+<div class="container" *ngIf="isLoggedIn()">
+    <h3>
+        Welcome, {{ user.name }}, to Travlr Getaways Admin. 
+    </h3>
+    <p>Please click Trips above to view and edit available trips.</p>
+</div>

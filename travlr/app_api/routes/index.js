@@ -17,11 +17,7 @@ router
 
 router
     .route('/register')
-    .post(authController.register);    
-
-router
-    .route('/register')
-    .post(auth, authController.register);    
+    .post(authController.register);      
 
 router
     .route('/trips')
